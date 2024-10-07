@@ -1,0 +1,70 @@
+/*
+Author: Brian Jordan
+Class: Computer Systems and Low Level Programming
+Date: 3/17/2024
+Lab 7: GDB
+
+
+1. What is the command to compile the files with extra symbols that are useful for GDB?
+- gcc -g filename1 filename2 filename... -o yourExecutableFileName
+
+2. What's the address of stuff?
+- 0x7fffffffbcb0
+
+3. What's the address of stuff[0]?
+- 0x7fffffffbcb0
+
+4. Do we expect these to be the same? Why? Explain what the [ ] operator does in C.
+Yes, first element and the name of the array are always the same address. [] gives you the address of the element of the array. 
+
+5. In Blowfish_Init( ), what is the value of key?
+- LAME_KEY
+
+6. What command(s) did you type in order to learn this?
+- "watch key"
+- and "continue"
+
+7. In Blowfish_Init( ), what are the values of i and j after the nested for loops have finished?
+i.e., after:
+for (i = 0; i < 4; i++) 
+for (j = 0; j < 256; j++){
+ctx->S[i][j] = ORIG_S[i][j];
+}
+- i = 4
+- j = 256
+
+8. What command(s) did you type in order to learn this?
+- list Blowfish_Init
+- Break 723
+- print i
+- print j
+
+9. Before the Blowfish_Encrypt function is called, what is the value of stuff[3] (for each, print
+the value, and the command used to obtain the value):
+o in hex? - print /x sutff[3] 0x0
+o in binary? - print /t sutff[3] 0
+o as a float? - print /t *(float *)&stuff[3] 0
+o as 4 chars? - print /x *((char *)&stuff[3])@4 {0x0, 0x0, 0x0, 0x0}
+
+10. Before the Blowfish_Encrypt function is called, what is the value of stuff if we treat it as a
+string? (You don't have to write the whole string. Just describe what's there.) What was the
+command typed in order to obtain this value?
+- sesame street: people in your neighborhood with bob script
+- gdb GDBassign
+- break 371
+- run- x/s stuff
+
+11. What is the value of x the first time that the function F() in Blowfish.c is called?
+- 1753098189
+
+12. What is the output if we run GDB's backtrace (abbreviated "bt") command inside the function
+F() in Blowfish.c the first time F() is called? Briefly explain the output of the command in your
+own words.
+- #0  F (ctx=0x7fffffffd320, x=1753098189) at blowfish.c:551
+- #1  0x0000555555555289 in Blowfish_Encrypt (ctx=0x7fffffffd320, xl=0x7fffffffbc50, xr=0x7fffffffbc54) at blowfish.c:603
+- #2  0x00005555555554f0 in Blowfish_Init (ctx=0x7fffffffd320, key=0x5555555570a0 "LAME_KEY", keyLen=8) at blowfish.c:755
+- #3  0x0000555555555738 in main () at gdbassign.c:383
+
+
+
+*/
